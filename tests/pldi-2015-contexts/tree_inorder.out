@@ -1,0 +1,9 @@
+(* Generated Thu Nov 13 00:35:54 2014 *)
+let tree_inorder : tree -> list =
+  let rec f1 (t1:tree) : list =
+    match t1 with
+      | Leaf -> Nil
+      | Node (t2, n1, t3) -> append (f1 t2) (Cons (n1, f1 t3))
+  in
+    f1
+;;

@@ -1,0 +1,13 @@
+(* Generated Thu Nov 13 00:35:23 2014 *)
+let list_even_parity : list -> bool =
+  let rec f1 (l1:list) : bool =
+    match l1 with
+      | Nil -> True
+      | Cons (b1, l2) -> (match f1 l2 with
+                            | True -> (match b1 with
+                                         | True -> False
+                                         | False -> True)
+                            | False -> b1)
+  in
+    f1
+;;

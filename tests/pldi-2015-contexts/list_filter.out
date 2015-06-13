@@ -1,0 +1,12 @@
+(* Generated Thu Nov 13 00:35:26 2014 *)
+let list_filter : (nat -> bool) -> list -> list =
+  fun (f2:nat -> bool) ->
+    let rec f3 (l1:list) : list =
+      match l1 with
+        | Nil -> Nil
+        | Cons (n1, l2) -> (match f2 n1 with
+                              | True -> Cons (n1, f3 l2)
+                              | False -> Nil)
+    in
+      f3
+;;

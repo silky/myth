@@ -1,0 +1,17 @@
+(* Generated Thu Nov 13 01:55:40 2014 *)
+let arith : exp -> nat =
+  let rec f1 (e1:exp) : nat =
+    match e1 with
+      | Const (n1) -> n1
+      | Sum (e2, e3) -> sum (f1 e2) (f1 e3)
+      | Prod (e2, e3) -> mult (f1 e2) (f1 e3)
+      | Pred (e2) -> (match f1 e2 with
+                        | O -> O
+                        | S (n1) -> n1)
+      | Max (e2, e3) -> (match compare (f1 e2) (f1 e3) with
+                           | LT -> f1 e3
+                           | EQ -> f1 e3
+                           | GT -> f1 e2)
+  in
+    f1
+;;

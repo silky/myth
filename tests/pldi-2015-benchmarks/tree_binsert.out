@@ -1,0 +1,13 @@
+(* Generated Thu Nov 13 00:35:53 2014 *)
+let tree_binsert : tree -> nat -> tree =
+  let rec f1 (t1:tree) : nat -> tree =
+    fun (n1:nat) ->
+      match t1 with
+        | Leaf -> Node (Leaf, n1, Leaf)
+        | Node (t2, n2, t3) -> (match comp_nat n2 n1 with
+                                  | CEq -> t1
+                                  | CGt -> Node (f1 t2 n1, n2, t3)
+                                  | CLt -> Node (t2, n2, f1 t3 n1))
+  in
+    f1
+;;

@@ -1,0 +1,16 @@
+(* Generated Thu Nov 13 00:35:23 2014 *)
+let list_compress : list -> list =
+  let rec f1 (l1:list) : list =
+    match l1 with
+      | Nil -> Nil
+      | Cons (n1, l2) -> (match f1 l2 with
+                            | Nil -> l1
+                            | Cons (n2, l3) -> (match compare n2 n1 with
+                                                  | LT -> Cons (n1,
+                                                            Cons (n2, l3))
+                                                  | EQ -> Cons (n1, l3)
+                                                  | GT -> Cons (n1,
+                                                            Cons (n2, l3))))
+  in
+    f1
+;;

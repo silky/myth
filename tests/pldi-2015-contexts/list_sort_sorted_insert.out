@@ -1,0 +1,9 @@
+(* Generated Thu Nov 13 00:35:51 2014 *)
+let list_sort_sorted_insert : list -> list =
+  let rec f1 (l1:list) : list =
+    match l1 with
+      | Nil -> Nil
+      | Cons (n1, l2) -> insert (f1 l2) n1
+  in
+    f1
+;;

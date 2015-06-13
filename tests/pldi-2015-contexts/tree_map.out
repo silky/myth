@@ -1,0 +1,10 @@
+(* Generated Thu Nov 13 00:35:54 2014 *)
+let tree_map : (nat -> nat) -> tree -> tree =
+  fun (f2:nat -> nat) ->
+    let rec f3 (t1:tree) : tree =
+      match t1 with
+        | Leaf -> Leaf
+        | Node (t2, n1, t3) -> Node (f3 t2, f2 n1, f3 t3)
+    in
+      f3
+;;

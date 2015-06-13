@@ -1,0 +1,9 @@
+(* Generated Thu Nov 13 00:35:52 2014 *)
+let nat_add : nat -> nat -> nat =
+  let rec f1 (n1:nat) : nat -> nat =
+    fun (n2:nat) -> match n1 with
+                      | O -> n2
+                      | S (n3) -> S (f1 n3 n2)
+  in
+    f1
+;;

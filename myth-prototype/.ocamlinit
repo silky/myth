@@ -1,0 +1,16 @@
+#use "topfind";;
+#thread;;
+#camlp4o;;
+#require "core.top";;
+#require "core.syntax";;
+
+#directory "_build/src"
+#load "synml.cma"
+
+(* Added by OPAM. *)
+let () =
+  try Topdirs.dir_directory (Sys.getenv "OCAML_TOPLEVEL_PATH")
+  with Not_found -> ()
+;;
+open Core.Std;;
+

@@ -1,0 +1,9 @@
+(* Generated Thu Nov 13 01:55:42 2014 *)
+let dyn_app_twice : dyn -> dyn -> dyn =
+  fun (d1:dyn) ->
+    fun (d2:dyn) ->
+      match d1 with
+        | Error -> Error
+        | Base (n1) -> Error
+        | Dyn (f3) -> f3 (f3 d2)
+;;

@@ -1,0 +1,11 @@
+(* Generated Thu Nov 13 00:35:27 2014 *)
+let list_fold : (nat -> nat -> nat) -> nat -> list -> nat =
+  fun (f2:nat -> nat -> nat) ->
+    fun (n1:nat) ->
+      let rec f4 (l1:list) : nat =
+        match l1 with
+          | Nil -> n1
+          | Cons (n2, l2) -> f2 (f4 l2) n2
+      in
+        f4
+;;

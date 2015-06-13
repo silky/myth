@@ -1,0 +1,4 @@
+PKG core lwt
+S src
+B _build
+B _build/src

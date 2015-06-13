@@ -1,0 +1,16 @@
+(* Generated Thu Nov 13 01:56:16 2014 *)
+let dyn_sum : dyn -> dyn -> dyn =
+  fun (d1:dyn) ->
+    fun (d2:dyn) ->
+      match d1 with
+        | Error -> Error
+        | Base (n1) -> (match n1 with
+                          | O -> (match d2 with
+                                    | Error -> Error
+                                    | Base (n2) -> d2
+                                    | Dyn (f3) -> Error)
+                          | S (n2) -> (match n2 with
+                                         | O -> succ d2
+                                         | S (n3) -> succ (succ d2)))
+        | Dyn (f3) -> Error
+;;

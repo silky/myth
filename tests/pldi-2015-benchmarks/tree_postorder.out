@@ -1,0 +1,14 @@
+(* Generated Thu Nov 13 00:37:25 2014 *)
+let tree_postorder : tree -> list =
+  let rec f1 (t1:tree) : list =
+    match t1 with
+      | Leaf -> Nil
+      | Node (t2, n1, t3) -> (match f1 t2 with
+                                | Nil -> append (f1 t3) (Cons (n1, Nil))
+                                | Cons (n2, l1) -> Cons (n2,
+                                                     append
+                                                       (append l1 (f1 t3))
+                                                       (Cons (n1, Nil))))
+  in
+    f1
+;;

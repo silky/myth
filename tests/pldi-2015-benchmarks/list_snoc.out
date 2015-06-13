@@ -1,0 +1,10 @@
+(* Generated Thu Nov 13 00:35:51 2014 *)
+let list_snoc : list -> nat -> list =
+  let rec f1 (l1:list) : nat -> list =
+    fun (n1:nat) ->
+      match l1 with
+        | Nil -> Cons (n1, Nil)
+        | Cons (n2, l2) -> Cons (n2, f1 l2 n1)
+  in
+    f1
+;;

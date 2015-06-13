@@ -1,0 +1,14 @@
+(* Generated Thu Nov 13 00:35:51 2014 *)
+let list_pairwise_swap : list -> list =
+  let rec f1 (l1:list) : list =
+    match l1 with
+      | Nil -> Nil
+      | Cons (n1, l2) -> (match f1 l2 with
+                            | Nil -> (match l2 with
+                                        | Nil -> Nil
+                                        | Cons (n2, l3) -> Cons (n2,
+                                                             Cons (n1, f1 l3)))
+                            | Cons (n2, l3) -> Nil)
+  in
+    f1
+;;

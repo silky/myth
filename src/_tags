@@ -1,0 +1,4 @@
+true: package(core)
+true: package(str)
+true: thread
+true: unsafe

@@ -1,0 +1,11 @@
+(* Generated Thu Nov 13 00:35:27 2014 *)
+let list_last : list -> natopt =
+  let rec f1 (l1:list) : natopt =
+    match l1 with
+      | Nil -> None
+      | Cons (n1, l2) -> (match l2 with
+                            | Nil -> Some (n1)
+                            | Cons (n2, l3) -> f1 l2)
+  in
+    f1
+;;

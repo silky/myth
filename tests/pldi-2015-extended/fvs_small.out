@@ -1,0 +1,10 @@
+(* Generated Thu Nov 13 01:56:26 2014 *)
+let fvs_small : exp -> list =
+  let rec f1 (e1:exp) : list =
+    match e1 with
+      | EBVar (n1) -> Nil
+      | EFVar (i1) -> Cons (i1, Nil)
+      | EApp (e2, e3) -> append (f1 e2) (f1 e3)
+  in
+    f1
+;;

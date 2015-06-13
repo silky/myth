@@ -1,0 +1,6 @@
+(* Generated Thu Nov 13 00:35:27 2014 *)
+let list_hd : list -> nat =
+  fun (l1:list) -> match l1 with
+                     | Nil -> O
+                     | Cons (n1, l2) -> n1
+;;

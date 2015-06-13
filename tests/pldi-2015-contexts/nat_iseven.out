@@ -1,0 +1,11 @@
+(* Generated Thu Nov 13 00:35:52 2014 *)
+let nat_iseven : nat -> bool =
+  let rec f1 (n1:nat) : bool =
+    match n1 with
+      | O -> True
+      | S (n2) -> (match n2 with
+                     | O -> False
+                     | S (n3) -> f1 n3)
+  in
+    f1
+;;

@@ -1,0 +1,6 @@
+(* Generated Thu Nov 13 00:35:22 2014 *)
+let bool_neg : bool -> bool =
+  fun (b1:bool) -> match b1 with
+                     | True -> False
+                     | False -> True
+;;

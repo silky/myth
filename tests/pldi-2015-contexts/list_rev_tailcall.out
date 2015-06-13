@@ -1,0 +1,10 @@
+(* Generated Thu Nov 13 00:35:51 2014 *)
+let list_rev_tailcall : list -> list -> list =
+  let rec f1 (l1:list) : list -> list =
+    fun (l2:list) ->
+      match l1 with
+        | Nil -> l2
+        | Cons (n1, l3) -> f1 l3 (Cons (n1, l2))
+  in
+    f1
+;;

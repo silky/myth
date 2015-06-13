@@ -1,0 +1,14 @@
+(* Generated Thu Nov 13 00:35:27 2014 *)
+let list_nth : list -> nat -> nat =
+  let rec f1 (l1:list) : nat -> nat =
+    fun (n1:nat) ->
+      match n1 with
+        | O -> (match l1 with
+                  | Nil -> O
+                  | Cons (n2, l2) -> n2)
+        | S (n2) -> (match l1 with
+                       | Nil -> O
+                       | Cons (n3, l2) -> f1 l2 n2)
+  in
+    f1
+;;

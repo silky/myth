@@ -1,0 +1,6 @@
+(* Generated Thu Nov 13 00:35:52 2014 *)
+let nat_pred : nat -> nat =
+  fun (n1:nat) -> match n1 with
+                    | O -> O
+                    | S (n2) -> n2
+;;

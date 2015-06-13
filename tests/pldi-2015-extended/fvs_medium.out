@@ -1,0 +1,17 @@
+(* Generated Thu Nov 13 01:56:26 2014 *)
+let fvs_medium : exp -> list =
+  let rec f1 (e1:exp) : list =
+    match e1 with
+      | Unit -> Nil
+      | BVar (n1) -> Cons (n1, Nil)
+      | FVar (n1) -> Nil
+      | Lam (n1, e2) -> f1 e2
+      | App (e2, e3) -> append (f1 e2) (f1 e3)
+      | Pair (e2, e3) -> append (f1 e2) (f1 e3)
+      | Fst (e2) -> f1 e2
+      | Snd (e2) -> f1 e2
+      | Const (n1) -> Nil
+      | Binop (e2, b1, e3) -> append (f1 e2) (f1 e3)
+  in
+    f1
+;;
