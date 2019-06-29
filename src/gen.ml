@@ -36,8 +36,7 @@ end = struct
         Int.hash met.size lxor Int.hash met.lambdas lxor 7919
       in
         (hash_ctx (List.zip_exn k.g (Util.range1 (Ctx.size k.g)))) lxor (hash_typ k.t) lxor (hash_met k.met)
-    exception Unimplemented
-    let hash_fold_t _ = (raise Unimplemented)
+    let hash_fold_t _ = failwith "GTS.hash_fold_t unimplemented"
     let compare = compare   (* NOTE: use the built-in compare function *)
     let sexp_of_t (_:t) : Sexp.t = failwith "GTS.sexp_of_t unimplemented"
     let t_of_sexp (_:Sexp.t) : t = failwith "GTS.t_of_sexp unimplemented"

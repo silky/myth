@@ -33,8 +33,7 @@ end = struct
     let make_key (env:env) (e:exp) = { env = env; e = e }
     let hash k = Hashtbl.hash k
     let compare = compare
-    exception Unimplemented
-    let hash_fold_t _ = (raise Unimplemented)
+    let hash_fold_t _ = failwith "GTS.hash_fold_t unimplemented"
     let sexp_of_t (_:t) : Sexp.t = failwith "GTS.sexp_of_t unimplemented"
     let t_of_sexp (_:Sexp.t) : t = failwith "GTS.t_of_sexp unimplemented"
   end
