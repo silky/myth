@@ -1,4 +1,4 @@
-open Core.Std
+open Core
 
 type atom  = int                    (* n, De Bruijn indices *)
 type id    = string                 (* x, C, D, Identifiers *)
@@ -87,7 +87,7 @@ module Sig = struct
   let rec gather_datatypes (s:t) : typ list =
     List.fold_left
       ~f:(fun ts (_, (_, dt)) ->
-        let t = TBase dt in if List.mem ts t then ts else t::ts)
+        let t = TBase dt in if List.mem ts t (=) then ts else t::ts)
       ~init:[] s
 
   let rec gather_ctors (dt:id) (s:t) : ctor_t list =
@@ -146,7 +146,7 @@ module Ctx = struct
 
   let gather_types (g:t) : typ list =
     List.fold_left
-      ~f:(fun ts (_, (t, _)) -> if List.mem ts t then ts else t::ts)
+      ~f:(fun ts (_, (t, _)) -> if List.mem ts t (=) then ts else t::ts)
       ~init:[] g
 
   let fetch_rec_arg (f:id) (g:t) : id option =
@@ -178,7 +178,7 @@ module Ctx = struct
 
   let is_dec_arg (x:id) (f:id) (g:t) : bool =
     match Util.lookup x g with
-    | Some (_, bs) -> List.mem bs (BDec f)
+    | Some (_, bs) -> List.mem bs (BDec f) (=)
     | None -> false
 
   let is_arg (x:id) (g:t) : bool =
@@ -283,7 +283,7 @@ let is_recursive_fun (g:Ctx.t) (e:exp) : bool =
 let fresh_id_from_list (ids:id list) (base:id) : id =
   let rec fresh n =
     let x = Printf.sprintf "%s%d" base n in
-    if List.mem ids x then fresh (n+1) else x
+    if List.mem ids x (=) then fresh (n+1) else x
   in
   fresh 1
 

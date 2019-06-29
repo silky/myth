@@ -1,4 +1,4 @@
-open Core.Std
+open Core
 open Consts
 open Lang
 
@@ -36,6 +36,8 @@ end = struct
         Int.hash met.size lxor Int.hash met.lambdas lxor 7919
       in
         (hash_ctx (List.zip_exn k.g (Util.range1 (Ctx.size k.g)))) lxor (hash_typ k.t) lxor (hash_met k.met)
+    exception Unimplemented
+    let hash_fold_t _ = (raise Unimplemented)
     let compare = compare   (* NOTE: use the built-in compare function *)
     let sexp_of_t (_:t) : Sexp.t = failwith "GTS.sexp_of_t unimplemented"
     let t_of_sexp (_:Sexp.t) : t = failwith "GTS.t_of_sexp unimplemented"
@@ -45,13 +47,13 @@ end = struct
 end
 
 let memo_eexp_tbl     : (GTS.t, exp Rope.t) Hashtbl.t =
-  Hashtbl.create ~hashable:GTS.hashable ()
+  Hashtbl.create (module GTS.Hash_queue.Key)
 let memo_eexp_rel_tbl : (GTS.t, exp Rope.t) Hashtbl.t =
-  Hashtbl.create ~hashable:GTS.hashable ()
+  Hashtbl.create (module GTS.Hash_queue.Key)
 let memo_iexp_tbl     : (GTS.t, exp Rope.t) Hashtbl.t =
-  Hashtbl.create ~hashable:GTS.hashable ()
+  Hashtbl.create (module GTS.Hash_queue.Key)
 let memo_iexp_rel_tbl : (GTS.t, exp Rope.t) Hashtbl.t =
-  Hashtbl.create ~hashable:GTS.hashable ()
+  Hashtbl.create (module GTS.Hash_queue.Key)
 
 (***** }}} *****)
 
@@ -152,13 +154,13 @@ and gen_eexp_rel_app (tmo:Timeout.t) (s:Sig.t)
   in
   let producer_types =
     Ctx.gather_types (Ctx.insert_bindspec xrel trel bs g)
-      |> List.dedup
+      |> List.dedup_and_sort ~compare:compare
       |> List.fold_left ~f:(fun acc u ->
         begin match extract_producer t u with
         | Some prod -> prod :: acc
         | None -> acc
         end) ~init:[]
-      |> List.dedup
+      |> List.dedup_and_sort ~compare:compare
   in
 
   (* To synthesize applications, there are two cases:

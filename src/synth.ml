@@ -1,4 +1,4 @@
-open Core.Std
+open Core
 open Consts
 open Lang
 open Rtree

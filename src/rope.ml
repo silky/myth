@@ -1,4 +1,4 @@
-open Core.Std
+open Core
 
 type 'a t =
   | Concat of 'a t * 'a t
@@ -80,7 +80,7 @@ let rec dedup (r:'a t) ~compare:(cc:'a -> 'a -> int) : 'a t =
       | _, OfList [] -> ml
       | _, _ -> Concat(ml, mr)
     end
-  | OfList l -> OfList (List.dedup ~compare:cc l)
+  | OfList l -> OfList (List.dedup_and_sort ~compare:cc l)
 
 let rec cons x r =
   match r with

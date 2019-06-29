@@ -1,4 +1,4 @@
-open Core.Std
+open Core
 open Consts
 open Lang
 open Pp
@@ -33,6 +33,8 @@ end = struct
     let make_key (env:env) (e:exp) = { env = env; e = e }
     let hash k = Hashtbl.hash k
     let compare = compare
+    exception Unimplemented
+    let hash_fold_t _ = (raise Unimplemented)
     let sexp_of_t (_:t) : Sexp.t = failwith "GTS.sexp_of_t unimplemented"
     let t_of_sexp (_:Sexp.t) : t = failwith "GTS.t_of_sexp unimplemented"
   end
@@ -41,7 +43,7 @@ end = struct
 end
 
 let lookup_tables : bool ref = ref true ;;
-let memo_eval_tbl : (GTS.t, value) Hashtbl.t = Hashtbl.create ~hashable:GTS.hashable ()
+let memo_eval_tbl : (GTS.t, value) Hashtbl.t = Hashtbl.create (module GTS.Hash_queue.Key)
 
 let find_in_table tbl key =
   if !eval_lookup_tables then
@@ -56,8 +58,8 @@ let rec eval (env:env) (e:exp) : value =
   match find_in_table memo_eval_tbl key with
   | Some ans -> ans
   | None ->
-    let ans = begin match e with
-    | EVar x -> List.Assoc.find_exn env x
+    let ans : Lang.value = begin match e with
+    | EVar x -> List.Assoc.find_exn env x ~equal:(=) 
     | EApp (e1, e2) ->
       let v1 = eval env e1 in
       let v2 = eval env e2 in

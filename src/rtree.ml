@@ -1,4 +1,4 @@
-open Core.Std
+open Core
 open Consts
 open Lang
 
@@ -332,7 +332,6 @@ let check_exp (e:exp) (env_global:env) (env_local:env) (v:value) : bool =
     if not !incomplete_constraints_flag then begin
       incomplete_constraints_flag := true;
       Printf.eprintf "Warning: incomplete constraint set given\n%s\n" msg;
-      flush_all ()
     end; false
 
 let satisfies_evidence (e:exp) (env_global:env) (vs:evidence list) : bool =
