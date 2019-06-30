@@ -1,4 +1,4 @@
-open Core.Std
+open Core
 open Lang
 
 let rec fix_to_let (e:exp) : exp =
@@ -12,7 +12,7 @@ let rec fix_to_let (e:exp) : exp =
   | EMatch (e, bs) -> EMatch (trans e, List.map ~f:(fun (p, e) -> (p, trans e)) bs)
   | EPFun ios -> EPFun (List.map ~f:(fun (e1, e2) -> (trans e1, trans e2)) ios)
   | EFix (f, (x, t1), t2, e) ->
-    if List.mem (free_vars e) f then
+    if List.mem (free_vars e) f (=) then
       ELet (f, true, [(x, t1)], t2, trans e, EVar f)
     else
       EFun ((x, t1), trans e)

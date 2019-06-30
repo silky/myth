@@ -23,8 +23,8 @@ Example Execution
     Warning: 5 states have shift/reduce conflicts.
     Warning: 19 shift/reduce conflicts were arbitrarily resolved.
     Finished, 58 targets (0 cached) in 00:00:15.
-    >$ ./synml.native tests/natlist/stutter.ml
-    let stutter : list -> list =
+    >$ ./synml.native tests/pldi-2015-benchmarks/list_stutter.ml
+    let list_stutter : list -> list =
       let rec f1 (l1:list) : list =
         match l1 with
           | Nil -> []
